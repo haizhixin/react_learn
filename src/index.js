@@ -1,41 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css'
-
-import src1 from './assest/1.jpg';
-import src2 from './assest/2.jpg';
-import src3 from './assest/3.jpg';
-
-let srcs = [src1, src2, src3];
-let container = document.getElementById("root");
-let index = 0;
-
-
-function render() {
-    ReactDOM.render(<img src={srcs[index]} alt="" />, container);
+import StudentList from './components/StudentList'
+const appkey = "demo13_1545210570249";
+/**
+ * 获取所有的学生数据
+ */
+async function fetchAllStudents() {
+    const stus = await fetch("http://api.duyiedu.com/api/student/findAll?appkey=" + appkey)
+        .then(resp => resp.json()).then(resp => resp.data)
+    return stus;
 }
-let timer;
-function start() {
-    stop()
-    timer = setInterval(() => {
+async function render() {
+    ReactDOM.render("正在加载中...", document.getElementById("root"))
+    // 获取所有学生数据
+    let stus = await fetchAllStudents()
+    console.log(stus)
+    ReactDOM.render(<StudentList stus={stus} ></StudentList>, document.getElementById("root"))
+}
+render()
 
-        index++;
-        index = (index % 3)
-        render()
-    }, 1000)
-}
 
-function stop() {
-    clearInterval(timer)
-}
-//鼠标进入图片切换
-container.onmouseenter = () => {
-    start()
-}
-// 鼠标移出图片停止切换
-container.onmouseleave = () => {
-    stop()
-}
 
 
 
