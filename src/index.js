@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import PagerList from './components/PagerList'
+import Test from './components/Test.js'
 
-ReactDOM.render(<PagerList></PagerList>, document.getElementById("root"));
+ReactDOM.render(<Test></Test>, document.getElementById("root"));
 
 /**
  * 获取所有的学生数据
