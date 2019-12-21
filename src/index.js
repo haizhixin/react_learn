@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Test from './components/Test.js'
+import App from './components/App.js'
 
-ReactDOM.render(<Test></Test>, document.getElementById("root"));
+ReactDOM.render(<App></App>, document.getElementById("root"));
 
 /**
  * 获取所有的学生数据
