@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
-import CheckboxGroup from "../CheckboxGroup"
-import { getAllStudents } from "../../../service/student"
-
+import Select from '../Select'
+import { getAllStudents } from "../../../service/student.js"
 export default class Test extends Component {
     state = {
         datas: [
@@ -9,7 +8,7 @@ export default class Test extends Component {
             { value: "basketball", text: "篮球" },
             { value: "movie", text: "电影" }
         ],
-        chooseDatas: []
+        value: ""
     }
 
     async componentWillMount() {
@@ -18,21 +17,24 @@ export default class Test extends Component {
             datas: stus.map(item => ({ value: item.id.toString(), text: item.name }))
         })
     }
-
-    render() {
-        return (
-            <CheckboxGroup
-                name="loves"
-                {...this.state}
-                onChange={vals => {
-                    this.setState({
-                        chooseDatas: vals
-                    })
-                }}
-
-            ></CheckboxGroup>
-
-        )
-
+    constructor(props) {
+        super(props)
     }
+    render() {
+        return (<Select
+            name="loves"
+            {...this.state
+            }
+            onChange={(val) => {
+                console.log(val, "val")
+                this.setState({
+                    value: val
+                })
+            }}
+        ></Select >)
+    }
+
+
 }
+
+

@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import RadioGroup from "./RadioGroup"
+import RadioGroup from "../RadioGroup"
 export default class Test extends Component {
     state = {
         datas: [

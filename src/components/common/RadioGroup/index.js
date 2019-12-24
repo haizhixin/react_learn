@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 
-
 export default class RadioGroup extends Component {
     constructor(props) {
         console.log(props, "props")
@@ -31,7 +30,5 @@ export default class RadioGroup extends Component {
         return <div>
             {radios}
         </div>
-
     }
-
 }
