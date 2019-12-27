@@ -1,9 +1,17 @@
 import React, { Component } from 'react'
-export default class CheckboxGroup extends Component {
+import types from "../../../utils/commonTypes"
+import PropTypes from "prop-types"
+import WithDataGroup from "../Hoc/withDataGroup"
+class CheckboxGroup extends Component {
     constructor(props) {
         super(props)
     }
-
+    static propTypes = {
+        info: types.singleData.isRequired,
+        name: PropTypes.string,
+        chooseDatas: types.ChooseDatas.isRequired,
+        onChange: PropTypes.func
+    }
     handlerChange = e => {
         let newArr = []
         if (e.target.checked) {
@@ -14,10 +22,9 @@ export default class CheckboxGroup extends Component {
 
         this.props.onChange && this.props.onChange(newArr, this.props.name, e)
     }
-
-    getCheckboxs() {
-        return this.props.datas.map((item, index) =>
-            <label key={item.value} style={{
+    render() {
+        return (
+            <label style={{
                 width: "200px",
                 display: "block",
                 textAlign: "left"
@@ -25,22 +32,15 @@ export default class CheckboxGroup extends Component {
                 <input
                     type="checkbox"
                     name={this.props.name}
-                    value={item.value}
-                    checked={this.props.chooseDatas.includes(item.value)}
+                    value={this.props.info.value}
+                    checked={this.props.chooseDatas.includes(this.props.info.value)}
                     onChange={this.handlerChange}
                 />
-                {item.text}
-            </label>)
-    }
-
-    render() {
-        let bs = this.getCheckboxs();
-        return (
-            <div style={{
-                width: "200px",
-                margin: "0 auto"
-            }}>{bs}</div>
+                {this.props.info.text}
+            </label>
         )
     }
 
 }
+
+export default WithDataGroup(CheckboxGroup) 

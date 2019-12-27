@@ -1,20 +1,34 @@
 import React, { Component } from 'react'
-export default class Select extends Component {
+import PropTypes from 'prop-types'
+import types from "../../../utils/commonTypes"
+import withDataGroup from "../Hoc/withDataGroup"
 
-
+class Option extends Component {
     constructor(props) {
         super(props)
     }
-    getOptions() {
-        return this.props.datas.map(item => <option key={item.value} value={item.value}>{item.text}</option>)
+    static propTypes = {
+        info: types.singleData.isRequired,
+    }
+    render() {
+        return <option value={this.props.info.value}>{this.props.info.text}</option>
+    }
+}
+const OptionGroup = withDataGroup(Option)
+export default class Select extends Component {
+    constructor(props) {
+        super(props)
+    }
+    static propTypes = {
+        value: PropTypes.string,
+        name: PropTypes.string.isRequired,
+        onChange: PropTypes.func,
     }
     handlerChange = (e) => {
         this.props.onChange && this.props.onChange(e.target.value, this.props.name, e)
     }
-
     render() {
-        let bs = this.getOptions();
-        return (<select style={
+        return <select style={
             {
                 width: "300px",
                 height: "100px",
@@ -23,7 +37,7 @@ export default class Select extends Component {
                 fontWeight: "bolder",
             }
         } onChange={this.handlerChange} name={this.props.name}>
-            {bs}
-        </select>)
+            <OptionGroup {...this.props}></OptionGroup>
+        </select>
     }
 } 

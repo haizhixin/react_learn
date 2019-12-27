@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import Select from '../Select'
 import { getAllStudents } from "../../../service/student.js"
+
 export default class Test extends Component {
-    state = {
+    // 组件默认属性
+    static = {
         datas: [
             { value: "football", text: "足球" },
             { value: "basketball", text: "篮球" },
@@ -10,6 +12,7 @@ export default class Test extends Component {
         ],
         value: ""
     }
+
 
     async componentWillMount() {
         const stus = await getAllStudents();
