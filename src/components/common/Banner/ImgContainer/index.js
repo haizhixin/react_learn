@@ -38,17 +38,12 @@ export default class ImgContainer extends Component {
             curTimes++;
             curLeft += dis;
             this.div.style.marginLeft = curLeft + "px";
-            if (curTimes == times) {
+            if (curTimes === times) {
                 this.div.style.marginLeft = targetLeft + "px";
                 clearInterval(this.timer)
             }
         }, this.tick)
     }
-
-
-
-
-
 
     render() {
         let imgs = this.props.imgSrcs.map((item, index) => <img src={item}
@@ -57,7 +52,7 @@ export default class ImgContainer extends Component {
                 height: this.props.imgHeight,
                 float: "left",
             }}
-            key={index}></img>)
+            key={index} alt=""></img>)
         return (
             <div
                 ref={this.containerRef}
